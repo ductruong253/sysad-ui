@@ -12,7 +12,7 @@ function MainNavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">eCoupon SysAd</Navbar.Brand>
+        <Navbar.Brand href="/">eCoupon SysAd</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         {token && (
           <Navbar.Collapse id="navbarScroll">

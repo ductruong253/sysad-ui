@@ -7,7 +7,9 @@ import { checkAuthLoader, tokenLoader } from "./utils/auth";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
+import GroupsPage, { groupsLoader } from "./pages/Groups";
 import { loader as logoutLoader } from "./pages/Logout";
+import GroupForm, { createGroup } from "./components/GroupForm";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +26,26 @@ const router = createBrowserRouter([
         action: authAction,
       },
       {
+        path: "groups",
+        element: <GroupsPage />,
+        loader: groupsLoader,
+        children: [
+          {
+            path: "",
+            loader: checkAuthLoader,
+            children: [
+              {
+                path: "newGroup",
+                element: <GroupForm />,
+                action: createGroup,
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: "logout",
-        loader: logoutLoader
+        loader: logoutLoader,
       },
     ],
   },
