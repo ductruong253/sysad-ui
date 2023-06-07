@@ -7,34 +7,12 @@ import { Link, Outlet, redirect } from "react-router-dom";
 import classes from "./Groups.module.css";
 
 function GroupsPage() {
-  // const [groups, setGroups] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchGroups() {
-  //     const token = getAuthToken();
-  //     const response = await fetch(
-  //       "http://localhost:8081/customer-groups/list/all",
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           Authorization: "Bearer " + token,
-  //         },
-  //       }
-  //     );
-  //     const resData = await response.json();
-  //     setGroups(resData.groups);
-  //   }
-  //   fetchGroups();
-  // }, []);
-
   return (
     <>
       <Outlet></Outlet>
       <Container fluid="md">
         <Row className={classes.btn_group}>
-          <Col></Col>
-          <Col></Col>
-          <Col>
+          <Col className={classes.btn_group}>
             <Button
               variant="primary"
               className={classes.btn}

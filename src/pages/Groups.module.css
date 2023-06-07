@@ -3,7 +3,10 @@
 }
 
 .btn_group {
-    margin: 1rem;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0.25rem 0 0.25rem 0;
 }
 
 .btn {

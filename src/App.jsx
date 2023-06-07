@@ -9,7 +9,8 @@ import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
 import GroupsPage, { groupsLoader } from "./pages/Groups";
 import { loader as logoutLoader } from "./pages/Logout";
-import GroupForm, { createGroup } from "./components/GroupForm";
+import GroupForm, { createGroup, updateGroup } from "./components/GroupForm";
+import GroupDetail, { groupDetailLoader } from "./components/GroupDetail";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,22 @@ const router = createBrowserRouter([
                 path: "newGroup",
                 element: <GroupForm />,
                 action: createGroup,
+              },
+              {
+                path: ":groupId",
+                id: "groupDetail",
+                loader: groupDetailLoader,
+                children: [
+                  {
+                    index: true,
+                    element: <GroupDetail />,
+                  },
+                  {
+                    path: "edit",
+                    element: <GroupForm />,
+                    action: updateGroup,
+                  },
+                ],
               },
             ],
           },

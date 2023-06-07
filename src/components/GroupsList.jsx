@@ -1,13 +1,14 @@
 import Table from "react-bootstrap/Table";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
+import classes from './GroupsList.module.css'
 function GroupsList() {
-  const groupsList = useLoaderData()
+  const groupsList = useLoaderData();
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover className={classes.groupsList}>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Group name</th>
+          <th className={classes.id}>ID</th>
+          <th className={classes.name}>Group name</th>
           <th>Description</th>
           <th>Phone</th>
           <th>Address</th>
@@ -16,8 +17,10 @@ function GroupsList() {
       <tbody>
         {groupsList.map((group) => (
           <tr key={group.id}>
-            <td>{group.id}</td>
-            <td>{group.groupName}</td>
+            <td className={classes.id}>{group.id}</td>
+            <td className={classes.name}>
+              <Link to={"/groups/" + group.id}>{group.groupName}</Link>
+            </td>
             <td>{group.groupDescription}</td>
             <td>{group.phoneNum}</td>
             <td>{group.address}</td>
