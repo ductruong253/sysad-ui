@@ -32,8 +32,8 @@ function MainNavBar() {
                 aria-label="Search"
               />
               <Button variant="outline-success">Search</Button>
-              <Button variant="outline-success">
-                <Link to="/logout">Logout</Link>
+              <Button variant="outline-secondary" href="/logout">
+                Logout
               </Button>
             </Form>
           </Navbar.Collapse>

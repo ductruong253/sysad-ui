@@ -17,16 +17,21 @@ function GroupForm() {
   return (
     <Modal show={true}>
       <Modal.Header>
-        <Modal.Title>Create new group</Modal.Title>
+        {group ? (
+          <Modal.Title>Edit group</Modal.Title>
+        ) : (
+          <Modal.Title>Create new group</Modal.Title>
+        )}
       </Modal.Header>
       <FormWrapper method="post" className={classes.form}>
         <Row className={classes.row + " mb-3"}>
           <Form.Group as={Col}>
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Code</Form.Label>
             <Form.Control
-              id="groupName"
-              name="groupName"
-              defaultValue={group ? group.groupName : ""}
+              id="code"
+              name="code"
+              disabled={group ? true : false}
+              defaultValue={group ? group.code : ""}
             />
           </Form.Group>
           <Form.Group as={Col}>
@@ -52,9 +57,9 @@ function GroupForm() {
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              id="groupDescription"
-              name="groupDescription"
-              defaultValue={group ? group.groupDescription : ""}
+              id="description"
+              name="description"
+              defaultValue={group ? group.description : ""}
             />
           </Form.Group>
         </Row>
@@ -93,16 +98,17 @@ export async function createGroup(data) {
 
 export async function updateGroup(data) {
   const token = getAuthToken();
+  const id = data.params.id;
   const formData = await data.request.formData();
-  const postData = Object.fromEntries(formData);
-  await fetch("http://localhost:8081/customer-groups", {
-    method: "PATCH",
-    body: JSON.stringify(postData),
+  const updatedData = Object.fromEntries(formData);
+  updatedData.id = parseInt(id);
+  await fetch("http://localhost:8081/customer-groups/id/" + id, {
+    method: "PUT",
+    body: JSON.stringify(updatedData),
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
   });
-
   return redirect("/groups");
 }

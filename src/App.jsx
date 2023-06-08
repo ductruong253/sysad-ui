@@ -1,5 +1,5 @@
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication";
@@ -34,6 +34,7 @@ const router = createBrowserRouter([
           {
             path: "",
             loader: checkAuthLoader,
+            element: <Outlet></Outlet>,
             children: [
               {
                 path: "newGroup",
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
                 action: createGroup,
               },
               {
-                path: ":groupId",
+                path: ":id",
                 id: "groupDetail",
                 loader: groupDetailLoader,
                 children: [

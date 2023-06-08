@@ -30,13 +30,13 @@ function GroupDetail() {
             <Col xs lg="2">
               Name:{" "}
             </Col>
-            <Col>{group.groupName}</Col>
+            <Col>{group.code}</Col>
           </Row>
           <Row>
             <Col xs lg="2">
               Description:{" "}
             </Col>
-            <Col>{group.groupDescription}</Col>
+            <Col>{group.description}</Col>
           </Row>
           <Row>
             <Col xs lg="2">
@@ -67,7 +67,7 @@ function GroupDetail() {
 export default GroupDetail;
 
 export async function groupDetailLoader({ params }) {
-  const id = params.groupId;
+  const id = params.id;
   const token = getAuthToken();
   const response = await fetch(
     "http://localhost:8081/customer-groups/id/" + id,
