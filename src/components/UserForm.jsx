@@ -86,7 +86,7 @@ export async function createUser(data) {
   const postData = Object.fromEntries(formData);
   postData.password = "12345";
   postData.groupId = parseInt(postData.groupId);
-  await fetch("http://localhost:8081/customers", {
+  const response = await fetch("http://localhost:8081/customers", {
     method: "POST",
     body: JSON.stringify(postData),
     headers: {
@@ -94,8 +94,14 @@ export async function createUser(data) {
       Authorization: "Bearer " + token,
     },
   });
-
-  return redirect("/users");
+  const resp = await response.json();
+  if (!response.ok) {
+    alert("Failed to create user: " + resp.message);
+    return redirect("/users/newUser");
+  } else {
+    alert("Success!");
+    return redirect("/users");
+  }
 }
 
 export async function updateUser(data) {
@@ -104,7 +110,7 @@ export async function updateUser(data) {
   const formData = await data.request.formData();
   const updatedData = Object.fromEntries(formData);
   updatedData.id = parseInt(id);
-  await fetch("http://localhost:8081/customers/id/" + id, {
+  const response = await fetch("http://localhost:8081/customers/id/" + id, {
     method: "PUT",
     body: JSON.stringify(updatedData),
     headers: {
@@ -112,6 +118,8 @@ export async function updateUser(data) {
       Authorization: "Bearer " + token,
     },
   });
+  if (!response.ok) {
+  }
   return redirect("/users");
 }
 
