@@ -22,7 +22,7 @@ function MainNavBar() {
               navbarScroll
             >
               <Nav.Link href="/groups">Groups</Nav.Link>
-              <Nav.Link href="/customers">Customers</Nav.Link>
+              <Nav.Link href="/users">Users</Nav.Link>
             </Nav>
             <Form className="d-flex">
               <Form.Control

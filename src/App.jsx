@@ -8,6 +8,7 @@ import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
 import GroupsPage, { groupsLoader } from "./pages/Groups";
+import UsersPage, { usersLoader } from "./pages/Users";
 import { loader as logoutLoader } from "./pages/Logout";
 import GroupForm, { createGroup, updateGroup } from "./components/GroupForm";
 import GroupDetail, { groupDetailLoader } from "./components/GroupDetail";
@@ -62,6 +63,19 @@ const router = createBrowserRouter([
         ],
       },
       {
+          path: "users",
+          element: <UsersPage />,
+          loader: usersLoader,
+          children: [
+            {
+              path: "",
+              loader: checkAuthLoader,
+              element: <Outlet></Outlet>,
+              children: [],
+            },
+          ],
+        },
+        {
         path: "logout",
         loader: logoutLoader,
       },

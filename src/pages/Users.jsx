@@ -1,10 +1,10 @@
-import GroupsList from "../components/GroupsList";
+import UsersList from "../components/UsersList";
 import { Col, Row, Container, Button } from "react-bootstrap";
 import { getAuthToken } from "../utils/auth";
 import { Outlet } from "react-router-dom";
-import classes from "./Groups.module.css";
+import classes from "./Users.module.css";
 
-function GroupsPage() {
+function UsersPage() {
   return (
     <>
       <Outlet></Outlet>
@@ -14,35 +14,32 @@ function GroupsPage() {
             <Button
               variant="primary"
               className={classes.btn}
-              href="/groups/newGroup"
+              href="/users/newUser"
             >
               {/* <Link className={classes.link} to="/groups/newGroup">Create group</Link> */}
-              Create group
+              New user
             </Button>
           </Col>
         </Row>
         <Row className={classes.list}>
           <Col>
-            <GroupsList />
+            <UsersList />
           </Col>
         </Row>
       </Container>
     </>
   );
 }
-export default GroupsPage;
+export default UsersPage;
 
-export async function groupsLoader() {
+export async function usersLoader() {
   const token = getAuthToken();
-  const response = await fetch(
-    "http://localhost:8081/customer-groups/list/all",
-    {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  const response = await fetch("http://localhost:8081/customers/list/all", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
   const resData = await response.json();
-  return resData.groups;
+  return resData.customers;
 }
