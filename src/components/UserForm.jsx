@@ -52,6 +52,7 @@ function UserForm() {
                 aria-label="Default select example"
                 id="groupId"
                 name="groupId"
+                defaultValue={user ? user.group.id : ""}
               >
                 <option>Select group...</option>
                 {groups.map((group) => (
@@ -109,7 +110,9 @@ export async function updateUser(data) {
   const id = data.params.id;
   const formData = await data.request.formData();
   const updatedData = Object.fromEntries(formData);
+  console.log(updatedData);
   updatedData.id = parseInt(id);
+  updatedData.groupId = parseInt(updatedData.groupId);
   const response = await fetch("http://localhost:8081/customers/id/" + id, {
     method: "PUT",
     body: JSON.stringify(updatedData),
