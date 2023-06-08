@@ -11,6 +11,7 @@ import GroupsPage, { groupsLoader } from "./pages/Groups";
 import UsersPage, { usersLoader } from "./pages/Users";
 import { loader as logoutLoader } from "./pages/Logout";
 import GroupForm, { createGroup, updateGroup } from "./components/GroupForm";
+import UserForm, { createUser, userGroupLoader } from "./components/UserForm";
 import GroupDetail, { groupDetailLoader } from "./components/GroupDetail";
 
 const router = createBrowserRouter([
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       {
         path: "groups",
         element: <GroupsPage />,
+        id: "groupsPage",
         loader: groupsLoader,
         children: [
           {
@@ -63,19 +65,26 @@ const router = createBrowserRouter([
         ],
       },
       {
-          path: "users",
-          element: <UsersPage />,
-          loader: usersLoader,
-          children: [
-            {
-              path: "",
-              loader: checkAuthLoader,
-              element: <Outlet></Outlet>,
-              children: [],
-            },
-          ],
-        },
-        {
+        path: "users",
+        element: <UsersPage />,
+        loader: usersLoader,
+        children: [
+          {
+            path: "",
+            loader: checkAuthLoader,
+            element: <Outlet></Outlet>,
+            children: [
+              {
+                path: "newUser",
+                element: <UserForm />,
+                action: createUser,
+                loader: userGroupLoader
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: "logout",
         loader: logoutLoader,
       },
